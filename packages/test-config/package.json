@@ -1,0 +1,13 @@
+{
+  "name": "@yap-react-ui-sandbox/test-config",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./setup": "./src/setup.ts",
+    "./vitest": "./src/vitest.config.ts"
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "^6.9.1"
+  }
+}
