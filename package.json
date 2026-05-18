@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "create:app": "bash scripts/create-app.sh",
-    "lint": "pnpm lint:oxlint && pnpm lint:eslint",
-    "lint:oxlint": "oxlint --deny-warnings .",
-    "lint:eslint": "eslint .",
+    "lint": "oxlint --deny-warnings .",
     "test": "pnpm test:unit && pnpm test:e2e",
     "test:unit": "pnpm -r --filter './apps/**' run test",
     "test:e2e": "playwright test",
@@ -30,30 +28,17 @@
   "pnpm": {
     "peerDependencyRules": {
       "allowedVersions": {
-        "eslint-plugin-import>eslint": "*",
-        "eslint-plugin-jsx-a11y>eslint": "*",
-        "eslint-plugin-react>eslint": "*"
+        "eslint-plugin-storybook>eslint": "*"
       }
     }
   },
   "devDependencies": {
-    "@eslint/js": "^10.0.1",
     "@playwright/test": "^1.60.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@types/node": "^25.8.0",
-    "eslint": "^10.4.0",
-    "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-jsx-a11y": "^6.10.2",
-    "eslint-plugin-oxlint": "^1.65.0",
-    "eslint-plugin-react": "^7.37.5",
-    "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-storybook": "^10.4.0",
-    "globals": "^17.6.0",
-    "jiti": "^2.7.0",
     "oxlint": "^1.65.0",
     "prettier": "^3.8.3",
-    "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.3"
+    "typescript": "^6.0.3"
   }
 }

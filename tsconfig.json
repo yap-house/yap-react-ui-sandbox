@@ -10,7 +10,7 @@
   },
   "include": [
     "types/**/*.d.ts",
-    "eslint.config.ts",
+    "oxlint.config.ts",
     "playwright.config.ts",
     "scripts/**/*.ts"
   ]
