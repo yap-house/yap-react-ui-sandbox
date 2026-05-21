@@ -25,13 +25,6 @@
     "node": "26.1.0",
     "pnpm": "11.2.2"
   },
-  "pnpm": {
-    "peerDependencyRules": {
-      "allowedVersions": {
-        "eslint-plugin-storybook>eslint": "*"
-      }
-    }
-  },
   "devDependencies": {
     "@playwright/test": "^1.60.0",
     "@testing-library/jest-dom": "^6.9.1",
