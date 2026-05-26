@@ -61,16 +61,19 @@ cat > tsconfig.app.json << 'TSCONFIG_APP'
 }
 TSCONFIG_APP
 
-# vite.config.ts（packages/test-config から共通設定を import）
+# vite.config.ts
 cat > vite.config.ts << 'VITE_CONFIG'
 import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
-import { vitestConfig } from "@yap-react-ui-sandbox/test-config/vitest";
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-  test: vitestConfig,
+  test: {
+    environment: "jsdom",
+    setupFiles: ["@yap-react-ui-sandbox/test-config/setup"],
+    globals: true,
+  },
 });
 VITE_CONFIG
 

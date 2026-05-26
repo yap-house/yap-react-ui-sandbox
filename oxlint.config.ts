@@ -1,13 +1,22 @@
 import { defineConfig } from "oxlint";
 
 export default defineConfig({
+  // ルールの実行に必要なプラグインを指定
   plugins: ["typescript", "unicorn"],
+
+  // ルールのカテゴリごとにエラーのレベルを指定
   categories: {
+    // コードの品質に関するルールはエラーにする
     correctness: "off",
   },
+
+  // ルールの実行に必要な環境を指定
   env: {
+    // ブラウザ環境を想定
     builtin: true,
   },
+
+  // ルールの実行から除外するファイルやディレクトリを指定
   ignorePatterns: [
     "**/dist/**",
     "**/build/**",
@@ -15,6 +24,8 @@ export default defineConfig({
     "**/storybook-static/**",
     "**/node_modules/**",
   ],
+
+  //　ベースとなるルールセットを指定
   rules: {
     "no-array-constructor": "error",
     "no-unused-expressions": "error",
@@ -37,7 +48,10 @@ export default defineConfig({
     "typescript/prefer-namespace-keyword": "error",
     "typescript/triple-slash-reference": "error",
   },
+
+  // ファイルの種類ごとにルールを上書きする
   overrides: [
+    // JavaScript と TypeScript の両方に適用するルール
     {
       files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
       rules: {
@@ -101,6 +115,8 @@ export default defineConfig({
         "valid-typeof": "error",
       },
     },
+
+    // TypeScript のみ適用するルール
     {
       files: ["**/*.ts", "**/*.tsx", "**/*.mts", "**/*.cts"],
       rules: {
@@ -126,6 +142,8 @@ export default defineConfig({
         "prefer-spread": "error",
       },
     },
+
+    // React コンポーネントのコードに適用するルール
     {
       files: ["apps/**/*.{ts,tsx}"],
       plugins: ["react", "jsx-a11y"],
@@ -289,10 +307,11 @@ export default defineConfig({
         "jsx-a11y/tabindex-no-positive": "error",
       },
     },
+    // Storybook のストーリーコードに適用するルール
     {
       files: [
-        "**/*.stories.@(ts|tsx|js|jsx|mjs|cjs)",
-        "**/*.story.@(ts|tsx|js|jsx|mjs|cjs)",
+        "**/*.stories.{ts,tsx,js,jsx,mjs,cjs}",
+        "**/*.story.{ts,tsx,js,jsx,mjs,cjs}",
       ],
       plugins: ["react", "import"],
       jsPlugins: ["eslint-plugin-storybook"],
@@ -311,11 +330,20 @@ export default defineConfig({
         "react/rules-of-hooks": "off",
       },
     },
+    // Storybook の設定ファイルに適用するルール
     {
-      files: [".storybook/main.@(js|cjs|mjs|ts)"],
+      files: [".storybook/main.{js,cjs,mjs,ts}"],
       jsPlugins: ["eslint-plugin-storybook"],
       rules: {
         "storybook/no-uninstalled-addons": "error",
+      },
+    },
+    // Storybook の Vite 設定ファイルに適用するルール
+    // storybook init が `/// <reference types="vitest/config" />` を自動追加するため除外
+    {
+      files: ["apps/**/vite.config.{js,ts}"],
+      rules: {
+        "typescript/triple-slash-reference": "off",
       },
     },
   ],
