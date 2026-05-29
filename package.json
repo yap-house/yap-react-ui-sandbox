@@ -13,13 +13,6 @@
   "keywords": [],
   "author": "Yap-house",
   "license": "ISC",
-  "devEngines": {
-    "packageManager": {
-      "name": "pnpm",
-      "version": "^11.1.2",
-      "onFail": "download"
-    }
-  },
   "type": "module",
   "volta": {
     "node": "26.1.0",
