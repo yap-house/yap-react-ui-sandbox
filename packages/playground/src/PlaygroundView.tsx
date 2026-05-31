@@ -2,8 +2,9 @@ import { Editor } from "@monaco-editor/react";
 import React, { useCallback, useMemo, useState } from "react";
 import { LiveError, LivePreview, LiveProvider } from "react-live";
 import styled from "styled-components";
-import { transform } from "@babel/standalone";
+
 import { useBeforeMountEditor } from "./hooks/useBeforeMountEditor";
+import { transformCode } from "./utils/transformCode";
 
 /** Default code to be displayed in the playground */
 const DEFAULT_CODE: string = `function Counter({ message }: { message: string }) {
@@ -101,24 +102,6 @@ export const PlaygroundView = React.memo(function PlaygroundView({
     </LiveProvider>
   );
 });
-
-/**
- * Transforms the input code using Babel to ensure it can be executed in the live preview.
- * @param code - The code string to be transformed.
- * @returns The transformed code string that can be executed in the live preview. If transformation fails, returns the original code.
- */
-function transformCode(code: string): string {
-  try {
-    return (
-      transform(code, {
-        presets: ["react", "typescript"],
-        filename: "playground.tsx",
-      }).code ?? ""
-    );
-  } catch {
-    return code;
-  }
-}
 
 /** Layout component for the playground view */
 const Layout = styled.div`
