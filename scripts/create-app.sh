@@ -90,7 +90,8 @@ pnpm add -D \
   jsdom \
   "@testing-library/react" \
   "@testing-library/user-event" \
-  "@yap-react-ui-sandbox/test-config@workspace:*"
+  "@yap-react-ui-sandbox/test-config@workspace:*" \
+  "@yap-react-ui-sandbox/playground@workspace:*"
 
 # ワークスペースルートで再インストール（workspace:* リンクを確立するため）
 cd "$REPO_ROOT"
