@@ -12,6 +12,10 @@ export default defineConfig({
     }),
   ],
   publicDir: false,
+  resolve: {
+    // Prefer ESM builds when bundling third-party packages
+    conditions: ["import", "browser", "default"],
+  },
   test: {
     environment: "jsdom",
     globals: true,
@@ -23,7 +27,7 @@ export default defineConfig({
       formats: ["es"],
     },
     rollupOptions: {
-      external: ["react", "react-dom"],
+      external: [/^react($|\/)/, /^react-dom($|\/)/],
     },
   },
 });
