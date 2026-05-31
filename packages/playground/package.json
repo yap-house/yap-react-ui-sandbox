@@ -1,0 +1,50 @@
+{
+  "name": "@yap-react-ui-sandbox/playground",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint --type-aware --type-check --fix",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/playground.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@microsoft/api-extractor": "^7.58.7",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/babel__standalone": "^7.1.9",
+    "@types/node": "^24.12.3",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "@vitest/ui": "^4.1.7",
+    "@yap-react-ui-sandbox/test-config": "workspace:*",
+    "jsdom": "^29.1.1",
+    "typescript": "~6.0.2",
+    "vite": "^8.0.12",
+    "vite-plugin-dts": "^5.0.1",
+    "vitest": "^4.1.7"
+  },
+  "dependencies": {
+    "@babel/standalone": "^7.29.7",
+    "@monaco-editor/react": "^4.7.0",
+    "react-live": "^4.1.8",
+    "styled-components": "^6.4.2"
+  }
+}

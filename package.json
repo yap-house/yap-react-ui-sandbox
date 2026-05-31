@@ -5,7 +5,7 @@
     "create:app": "bash scripts/create-app.sh",
     "lint": "oxlint --type-aware --type-check --fix",
     "test": "pnpm test:unit && pnpm test:e2e",
-    "test:unit": "pnpm -r --filter './apps/**' run test",
+    "test:unit": "pnpm -r --filter './apps/**' --filter './packages/**' run test",
     "test:e2e": "playwright test",
     "test:e2e:ui": "playwright test --ui",
     "playwright:install": "playwright install --with-deps"
