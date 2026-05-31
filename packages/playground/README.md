@@ -1,73 +1,101 @@
-# React + TypeScript + Vite
+# @yap-react-ui-sandbox/playground
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A live code playground component for the `yap-react-ui-sandbox` monorepo.
+Provides an in-browser TypeScript/JSX editor (Monaco Editor) with real-time preview (react-live).
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- **Monaco Editor** — VS Code-grade editor with TypeScript and JSX syntax support
+- **Live preview** — Code changes are reflected in the preview pane instantly via react-live
+- **Scoped execution** — Pass any component or value as `scope` to make it available in the editor
+- **Babel transform** — TypeScript + JSX code is transpiled in the browser via `@babel/standalone`
+- **styled-components** — Bundled and available in the editor scope by default
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## Usage
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+This package is private and intended to be consumed within the monorepo.
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+```tsx
+import { PlaygroundView } from "@yap-react-ui-sandbox/playground";
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+// Minimal — uses built-in default code (a Counter component example)
+<PlaygroundView />
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+// With custom default code and scoped components
+<PlaygroundView
+  defaultCode="render(<MyButton label='Click me' />);"
+  scope={{ MyButton }}
+/>
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Props
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### `PlaygroundViewProps`
+
+| Prop          | Type                      | Default         | Description                                                   |
+| ------------- | ------------------------- | --------------- | ------------------------------------------------------------- |
+| `scope`       | `Record<string, unknown>` | `{}`            | Variables and components available in the live editor's scope |
+| `defaultCode` | `string`                  | Counter example | Initial code displayed in the editor                          |
+
+#### Always available in scope
+
+The following are always injected regardless of `scope`:
+
+| Name     | Value               |
+| -------- | ------------------- |
+| `React`  | `react`             |
+| `styled` | `styled-components` |
+
+---
+
+## Architecture
+
 ```
+PlaygroundView
+├── Monaco Editor          — TypeScript/JSX editor (path="App.tsx" for TSX support)
+│   └── useBeforeMountEditor — Configures TS compiler options and scope type declarations
+└── react-live
+    ├── LiveProvider       — Executes transformed code with the given scope
+    ├── LivePreview        — Renders the output of render()
+    └── LiveError          — Displays runtime/transform errors
+```
+
+Code entered in the editor is transformed by `@babel/standalone` (presets: `react`, `typescript`) before being passed to `LiveProvider`.
+The editor uses `noInline` mode, so the entry point must be an explicit `render(...)` call.
+
+---
+
+## Development
+
+```bash
+# Start dev server (Vite)
+pnpm dev
+
+# Build library (outputs to dist/)
+pnpm build
+
+# Run unit tests
+pnpm test
+
+# Run tests in watch mode
+pnpm test:watch
+```
+
+---
+
+## Dependencies
+
+| Package                | Role                                 |
+| ---------------------- | ------------------------------------ |
+| `@monaco-editor/react` | Code editor component                |
+| `react-live`           | Live preview engine                  |
+| `@babel/standalone`    | In-browser TypeScript/JSX transform  |
+| `styled-components`    | CSS-in-JS, available in editor scope |
+
+**Peer dependencies:** `react ^19.0.0`, `react-dom ^19.0.0`
