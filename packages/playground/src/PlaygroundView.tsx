@@ -4,7 +4,6 @@ import { LiveError, LivePreview, LiveProvider } from "react-live";
 import styled from "styled-components";
 
 import { useBeforeMountEditor } from "./hooks/useBeforeMountEditor";
-import { transformCode } from "./utils/transformCode";
 
 /** Default code to be displayed in the playground */
 const DEFAULT_CODE: string = `function Counter({ message }: { message: string }) {
@@ -74,12 +73,7 @@ export const PlaygroundView = React.memo(function PlaygroundView({
   const handleBeforeMount = useBeforeMountEditor(overrideScope);
 
   return (
-    <LiveProvider
-      scope={overrideScope}
-      code={code}
-      noInline
-      transformCode={transformCode}
-    >
+    <LiveProvider scope={overrideScope} code={code} noInline>
       <Layout>
         <EditorPane>
           <Editor
