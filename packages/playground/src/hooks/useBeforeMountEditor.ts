@@ -1,4 +1,5 @@
 import type { Monaco } from "@monaco-editor/react";
+import type * as MonacoEditor from "monaco-editor";
 import { useCallback } from "react";
 
 /**
@@ -15,10 +16,14 @@ export function useBeforeMountEditor(
 ): (monaco: Monaco) => void {
   return useCallback(
     (monaco: Monaco) => {
+      // Monaco type is based on editor.api, so cast to the full editor.main type
+      // to access the top-level "typescript" namespace (introduced in v0.55)
+      const ts = (monaco as unknown as typeof MonacoEditor).typescript;
+
       // Configure TypeScript compiler options
-      monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
-        jsx: monaco.languages.typescript.JsxEmit.React,
-        target: monaco.languages.typescript.ScriptTarget.ESNext,
+      ts.typescriptDefaults.setCompilerOptions({
+        jsx: ts.JsxEmit.React,
+        target: ts.ScriptTarget.ESNext,
         allowNonTsExtensions: true,
         strict: false,
       });
@@ -37,7 +42,7 @@ export function useBeforeMountEditor(
       ].join("\n");
 
       // Add the declarations to Monaco's TypeScript language service
-      monaco.languages.typescript.typescriptDefaults.addExtraLib(
+      ts.typescriptDefaults.addExtraLib(
         declarations,
         "file:///node_modules/@types/playground-scope/index.d.ts",
       );
