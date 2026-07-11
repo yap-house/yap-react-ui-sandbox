@@ -118,6 +118,10 @@ pkg.scripts = {
   "build-storybook": "storybook build",
 };
 
+pkg.volta = {
+  extends: "../../package.json"
+};
+
 writeFileSync(pkgPath, JSON.stringify(pkg, null, 2) + "\n");
 console.log("scripts を更新しました");
 SCRIPT
