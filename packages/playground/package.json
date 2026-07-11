@@ -4,9 +4,11 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc -b && vite build",
-    "lint": "oxlint --type-aware --type-check --fix",
+    "dev": "vite dev",
+    "build": "vite build && pnpm run build:types",
+    "build:types": "tsc -p tsconfig.types.json",
+    "lint": "oxlint --type-aware --type-check",
+    "lint:fix": "oxlint --type-aware --type-check --fix",
     "preview": "vite preview",
     "test": "vitest run",
     "test:watch": "vitest",
@@ -15,8 +17,8 @@
   },
   "exports": {
     ".": {
-      "import": "./src/index.ts",
-      "types": "./src/index.ts"
+      "import": "./dist/playground.js",
+      "types": "./dist/types/index.d.ts"
     }
   },
   "types": "./src/index.ts",
@@ -38,7 +40,6 @@
     "jsdom": "^29.1.1",
     "typescript": "~7.0.2",
     "vite": "^8.1.4",
-    "vite-plugin-dts": "^5.0.3",
     "vitest": "^4.1.10"
   },
   "dependencies": {

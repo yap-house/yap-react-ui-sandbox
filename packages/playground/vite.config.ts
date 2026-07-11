@@ -1,16 +1,9 @@
 import { defineConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
-import dts from "vite-plugin-dts";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-    dts({
-      tsconfigPath: "./tsconfig.app.json",
-      bundleTypes: true,
-    }),
-  ],
+  plugins: [react()],
   publicDir: false,
   resolve: {
     // Prefer ESM builds when bundling third-party packages
