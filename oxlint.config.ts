@@ -25,7 +25,7 @@ export default defineConfig({
     "**/node_modules/**",
   ],
 
-  //　ベースとなるルールセットを指定
+  // ベースとなるルールセットを指定
   rules: {
     "no-array-constructor": "error",
     "no-unused-expressions": "error",

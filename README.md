@@ -9,13 +9,13 @@ Each app under `apps/` integrates a different UI library (Material UI, shadcn/ui
 
 | Category        | Technology                    |
 | --------------- | ----------------------------- |
-| Package manager | pnpm 11 (workspaces)          |
-| Runtime         | Node.js 26 (managed by Volta) |
-| Language        | TypeScript 6                  |
+| Package manager | pnpm (workspaces)             |
+| Runtime         | Node.js 26 (managed by mise)  |
+| Language        | TypeScript 7                  |
 | Build           | Vite 8                        |
 | UI              | React 19                      |
 | Styling         | styled-components 6           |
-| Unit testing    | Vitest 4 + Testing Library    |
+| Unit testing    | Vitest 5 + Testing Library    |
 | E2E testing     | Playwright                    |
 | Linting         | oxlint                        |
 | Formatting      | Prettier                      |
@@ -24,9 +24,9 @@ Each app under `apps/` integrates a different UI library (Material UI, shadcn/ui
 
 ## Prerequisites
 
-- [Volta](https://volta.sh/) — automatically pins Node.js and pnpm versions
-- Node.js 26.1.0 (managed by Volta)
-- pnpm 11.2.2 (managed by Volta)
+- [mise](https://mise.jdx.dev/) — automatically pins Node.js and pnpm versions
+- Node.js 26 (managed by mise)
+- pnpm latest (managed by mise)
 
 ---
 
