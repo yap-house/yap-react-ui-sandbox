@@ -47,8 +47,5 @@
     "monaco-editor": "^0.56.0",
     "react-live": "^4.1.8",
     "styled-components": "^6.5.3"
-  },
-  "volta": {
-    "extends": "../../package.json"
   }
 }

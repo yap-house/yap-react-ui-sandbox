@@ -15,10 +15,6 @@
   "author": "Yap-house",
   "license": "ISC",
   "type": "module",
-  "volta": {
-    "node": "26.1.0",
-    "pnpm": "11.11.0"
-  },
   "devDependencies": {
     "@playwright/test": "^1.63.0",
     "@testing-library/jest-dom": "^7.0.1",
